@@ -1,0 +1,60 @@
+### créer un utilisateur
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "email": "milan@example.com",
+  "password": "milanlamette",
+  "first_name": "Milan",
+  "last_name": "Lamette",
+  "street": "1 rue de la Paix",
+  "zip_code": 75001,
+  "country": "France",
+  "city": "Paris"
+}
+
+### créer un utilisateur admin
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "email": "admin@green-roots.com",
+  "password": "admin1234",
+  "first_name": "Vincent",
+  "last_name": "Rou",
+  "user_role": "admin",
+  "street": "2 rue de la Paix",
+  "zip_code": 75001,
+  "country": "France",
+  "city": "Paris"
+}
+
+### 1. Connexion
+POST http://localhost:3000/sessions
+Content-Type: application/json
+
+{
+  "email": "vincent@example.com",
+  "password": "vincent"
+}
+
+### 2. Connexion
+POST http://localhost:3000/sessions
+Content-Type: application/json
+
+{
+  "email": "milan@example.com",
+  "password": "milanlamette"
+}
+
+### supprimer un utilisateur
+DELETE http://localhost:3000/users/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NTg4NjMzNywiZXhwIjoxNzQ1ODg5OTM3fQ.Kn4MN0Qw63S264Ql3PKIqdlzp2-p0eeHtHaM8wWuXv4
+
+### récuperer tous les utilisateurs
+GET http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NTg4OTI3OCwiZXhwIjoxNzQ1OTc1Njc4fQ.bGkZSCj-oAYKFTKCMKaqOZv82qygi7iBr7f8vByL4nw
+
+### récuperer tous les produits
+GET http://localhost:3000/products
+

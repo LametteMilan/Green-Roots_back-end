@@ -1,0 +1,38 @@
+{
+  "name": "greenrootsback",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch --env-file=.env ./app.js",
+    "db:create": "node --env-file=.env ./migrations/01.create-table.js",
+    "db:alter": "node --env-file=.env ./migrations/04.alter-password.js",
+    "db:seed": "node --env-file=.env ./migrations/02.seed-table.js",
+    "db:reset": "npm run db:create && npm run db:alter && npm run db:seed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Samoussas/green-roots-back.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/O-clock-Samoussas/green-roots-back/issues"
+  },
+  "homepage": "https://github.com/O-clock-Samoussas/green-roots-back#readme",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.2",
+    "pg": "^8.15.6",
+    "pg-connection-string": "^2.8.5",
+    "postgres": "^3.4.5",
+    "sequelize": "^6.37.7"
+  }
+}
