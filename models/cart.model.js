@@ -10,16 +10,28 @@ Cart.init(
       autoIncrement: true,
       primaryKey: true,
     },
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
     id_user: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true,
-    },
+      unique: true, // Un utilisateur ne peut avoir qu’un seul panier
+      references: {
+        model: "users",  
+        key: "id_user",
+      }
+    }
   },
   {
     sequelize,
-    tableName: "cart",
-    timestamps: true,
-    underscored: true
+    tableName: "cart",      // nom exact de la table SQL
+    timestamps: false,      // car tu fournis explicitement created_at et updated_at
+    underscored: true       
   }
 );

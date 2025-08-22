@@ -4,13 +4,14 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch --env-file=.env ./app.js",
-    "db:create": "node --env-file=.env ./migrations/01.create-table.js",
-    "db:alter": "node --env-file=.env ./migrations/04.alter-password.js",
-    "db:seed": "node --env-file=.env ./migrations/02.seed-table.js",
-    "db:reset": "npm run db:create && npm run db:alter && npm run db:seed"
-  },
+  "db:migrate": "npx sequelize-cli db:migrate",
+  "db:migrate:undo": "npx sequelize-cli db:migrate:undo",
+  "db:seed": "npx sequelize-cli db:seed:all",
+  "db:seed:undo": "npx sequelize-cli db:seed:undo:all",
+  "db:reset": "npm run db:migrate:undo:all && npm run db:migrate && npm run db:seed",
+  "dev": "node --env-file=.env app.js"
+}
+,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/O-clock-Samoussas/green-roots-back.git"
@@ -34,5 +35,8 @@
     "pg-connection-string": "^2.8.5",
     "postgres": "^3.4.5",
     "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.3"
   }
 }
