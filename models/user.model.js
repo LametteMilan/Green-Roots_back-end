@@ -1,6 +1,5 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from "./config/client.js";
-import { Bookmark } from "./bookmark.model.js";
 
 export class User extends Model {}
 
@@ -60,5 +59,4 @@ User.init(
   },
 );
 
-// User.hasMany(Bookmark, { foreignKey: 'id_user' });
-// Bookmark.belongsTo(User, { foreignKey: 'id_user' });
+ 

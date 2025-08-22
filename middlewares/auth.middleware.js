@@ -3,6 +3,9 @@ import { User } from '../models/user.model.js';
 
 export const authMiddleware = async (req, res, next) => {
     try {
+      //toutes les modification n'ayant pas été apporter je décode le token
+      //  dans les headers et dans le cookie mais il devra être seulement stoker dans le cookie
+      //  une fois terminer
       const token = req.headers.authorization?.split(' ')[1] || req.cookies?.token;
       console.log("Token reçu:", token);
   

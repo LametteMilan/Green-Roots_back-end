@@ -29,19 +29,21 @@ export const sessionController = {
           process.env.JWT_SECRET,
           { expiresIn: '24h' }
         );
-        console.log("Token généré:", token); 
-  
+        console.log("Token généré:", token);
+
+        // Envoi du JWT dans un cookie httpOnly sécurisé (plus sécurisé que dans body JSON)
         res.cookie('token', token, { 
           httpOnly: true,
           secure: process.env.NODE_ENV === 'production',
           sameSite: 'strict',
-          maxAge: 3600000
+          maxAge: 24 * 60 * 60 * 1000 
         });
-  
+        
+        // envoie uniquement le les info utilisateur dans la réponse JSON
         res.json({
           userId: user.id_user,
           role: user.user_role,
-          token
+          message: "Connexion réussie"
         });
   
       } catch (error) {
@@ -51,6 +53,7 @@ export const sessionController = {
     },
 
   destroy: (req, res) => {
+    // Suppression du cookie token à la déconnexion
     res.clearCookie('token');
     res.status(204).end();
   },

@@ -19,7 +19,7 @@ Content-Type: application/json
 
 {
   "email": "admin@green-roots.com",
-  "password": "admin1234",
+  "password": "admin123",
   "first_name": "Vincent",
   "last_name": "Rou",
   "user_role": "admin",
@@ -34,8 +34,8 @@ POST http://localhost:3000/sessions
 Content-Type: application/json
 
 {
-  "email": "vincent@example.com",
-  "password": "vincent"
+  "email": "admin@green-roots.com",
+  "password": "admin123"
 }
 
 ### 2. Connexion
@@ -57,4 +57,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInJvb
 
 ### récuperer tous les produits
 GET http://localhost:3000/products
+
+### récuperer toutes les commandes
+GET http://localhost:3000/orders
 

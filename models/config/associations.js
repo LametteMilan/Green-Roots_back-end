@@ -13,6 +13,8 @@ export const setupAssociations = () => {
   // User associations
   User.hasOne(Cart, { foreignKey: 'id_user' });
   User.hasMany(Order, { foreignKey: 'id_user' });
+  User.hasMany(Bookmark, { foreignKey: 'id_user' });
+  Bookmark.belongsTo(User, { foreignKey: 'id_user' });
   User.belongsToMany(Product, { through: Rating, foreignKey: 'id_user', as: 'RatedProducts' });
   User.belongsToMany(Product, { through: Bookmark, foreignKey: 'id_user', as: 'BookmarkedProducts' });
 

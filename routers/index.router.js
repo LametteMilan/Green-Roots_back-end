@@ -18,24 +18,30 @@ const router = express.Router();
 router.post('/sessions', sessionController.create);
 router.delete('/sessions', authMiddleware, sessionController.destroy);
 router.get('/sessions/verify', authMiddleware, sessionController.verify);
+router.get('/users/profile', authMiddleware, userController.getProfile);
 
 /************************* Routes publiques************************/
-
-router.get('/users', authMiddleware, roleMiddleware(ROLES.ADMIN), userController.getAllUsers);
+router.get('/products/:id_product', productController.getOneProduct);
+router.get('/products', productController.getAllProducts);
 router.get('/users/:id_user', authMiddleware, userController.getOneUser);
 router.post('/users', userController.createUser);
 router.put('/users/:id_user', authMiddleware, userController.updateUser);
-router.delete('/users/:id_user', authMiddleware, roleMiddleware(ROLES.ADMIN), userController.deleteUser);
+
 
 /************************* Routes Admin************************/
 
-router.get('/products', productController.getAllProducts);
-router.get('/products/:id_product', productController.getOneProduct);
+router.delete('/ratings/:id_user/:id_product', authMiddleware, roleMiddleware(ROLES.ADMIN), ratingController.deleteRating);
+router.put('/ratings/:id_user/:id_product', authMiddleware, roleMiddleware(ROLES.ADMIN), ratingController.updateRating);
+router.get('/bookmarks', authMiddleware, roleMiddleware(ROLES.ADMIN), bookmarkController.getAllBookmarks);
+router.get('/orders', authMiddleware, roleMiddleware(ROLES.ADMIN), orderController.getAllOrders);
+router.delete('/users/:id_user', authMiddleware, roleMiddleware(ROLES.ADMIN), userController.deleteUser);
+router.get('/users', authMiddleware, roleMiddleware(ROLES.ADMIN), userController.getAllUsers);
 router.post('/products', authMiddleware, roleMiddleware(ROLES.ADMIN), upload.single('image'), productController.createProduct);
 router.put('/products/:id_product', authMiddleware, roleMiddleware(ROLES.ADMIN), upload.single('image_product'),productController.updateProduct);
 router.delete('/products/:id_product', authMiddleware, roleMiddleware(ROLES.ADMIN), productController.deleteProduct);
 
 // Routes pour gérer le lien entre produits et panier (qté & produits)
+
 router.get('/product-carts', authMiddleware, productCartController.getAllProductCarts);
 router.get('/product-carts/:id_cart/:id_product',authMiddleware, productCartController.getOneProductCart);
 router.post('/product-carts',authMiddleware, productCartController.createProductCart);
@@ -55,7 +61,7 @@ router.delete('/carts/:id_cart', authMiddleware, cartController.deleteCart);
 router.get('/carts/:id_cart/products', authMiddleware, cartController.getCartProducts);
 
 
-router.get('/bookmarks', authMiddleware, roleMiddleware(ROLES.ADMIN), bookmarkController.getAllBookmarks);
+
 router.post('/bookmarks',authMiddleware, bookmarkController.createBookmark);
 router.put('/bookmarks/:id_user',authMiddleware, bookmarkController.updateBookmark);
 router.delete('/bookmarks/:id_user',authMiddleware, bookmarkController.deleteBookmark);
@@ -67,13 +73,13 @@ router.get('/bookmarks/:id_user/products',authMiddleware, bookmarkController.get
 router.get('/ratings', ratingController.getAllRatings);
 router.get('/ratings/:id_user/:id_product', ratingController.getOneRating);
 router.post('/ratings', authMiddleware, ratingController.createRating);
-router.put('/ratings/:id_user/:id_product', authMiddleware, roleMiddleware(ROLES.ADMIN), ratingController.updateRating);
-router.delete('/ratings/:id_user/:id_product', authMiddleware, roleMiddleware(ROLES.ADMIN), ratingController.deleteRating);
+
+
 router.get('/products/:id_product/ratings', ratingController.getProductRatings);
 router.get('/users/:id_user/ratings', authMiddleware, ratingController.getUserRatings);
 
 
-router.get('/orders', authMiddleware, roleMiddleware(ROLES.ADMIN), orderController.getAllOrders);
+
 router.get('/orders/:id_order', authMiddleware, orderController.getOneOrder);
 router.post('/orders', authMiddleware, orderController.createOrder);
 router.put('/orders/:id_order', authMiddleware, orderController.updateOrder);

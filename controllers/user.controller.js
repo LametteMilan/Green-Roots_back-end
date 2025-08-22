@@ -18,6 +18,20 @@ export const userController = {
         }
     },
 
+    async getProfile(req, res) {
+        try {
+            const user = await User.findByPk(req.userId, {
+                attributes: { exclude: ['password'] }
+            });
+            if (!user) return res.status(404).json({ error: 'Utilisateur introuvable' });
+            res.json(user);
+        } catch (error) {
+            console.error('Erreur getProfile:', error);
+            res.status(500).json({ error: 'Erreur serveur' });
+        }
+    },
+    
+
     async createUser(req, res) {
         try {
             const userData = req.body;
