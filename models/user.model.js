@@ -60,5 +60,5 @@ User.init(
   },
 );
 
- User.hasMany(Bookmark, { foreignKey: 'id_user' });
- Bookmark.belongsTo(User, { foreignKey: 'id_user' });
+// User.hasMany(Bookmark, { foreignKey: 'id_user' });
+// Bookmark.belongsTo(User, { foreignKey: 'id_user' });
